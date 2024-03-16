@@ -42,4 +42,15 @@ public class toDoController {
         return "redirect:/Todo";
     }
 
+    @PostMapping("/{id}/done")
+    public String markTaskAsDone(@PathVariable int id) {
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                task.setDone(true);
+                break;
+            }
+        }
+        return "redirect:/Todo";
+    }
+
 }

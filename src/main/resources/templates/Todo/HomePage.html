@@ -80,7 +80,7 @@
                         <td class="border px-4 py-2" th:text="${task.id}">1</td>
                         <td class="border px-4 py-2" th:text="${task.taskName}">Work Out</td>
                         <td class="border px-4 py-2" th:text="${task.description}">This weekend</td>
-                        <td class="border px-4 py-2" th:text="${task.done}">False</td>
+                        <td class="border px-4 py-2" th:text="${task.done ? 'Done' : 'Not Done'}">False</td>
                         <td class="border px-4 py-2" th:text="${task.getFormattedDate()}"></td>
                         <td class="border px-4 py-2">
                             <button class="bg-blue-400 hover:bg-blue-500 rounded-lg">
