@@ -65,7 +65,11 @@
             <input class="rounded-lg" type="number" th:field="*{id}" readonly>
             <input class="rounded-lg" type="text" th:field="*{taskName}" placeholder="Title">
             <input class="rounded-lg" type="text" th:field="*{description}" placeholder="Description">
-            <input class="rounded-lg" type="date" th:field="*{date}" placeholder="Date">
+            <select class="rounded-lg bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                    th:field="*{done}">
+                <option value="true">Done</option>
+                <option value="false">Not Done</option>
+            </select>
             <div class="flex flex-row justify-center">
                 <button class=" m-2" type="submit"><p class="rounded-lg bg-blue-500 hover:bg-blue-800 text-xl text-black hover:text-white p-4">Save</p></button>
                 <button class="m-2">

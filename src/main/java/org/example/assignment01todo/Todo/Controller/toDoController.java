@@ -19,8 +19,8 @@ public class toDoController {
         tasks = new ArrayList<>();
 
         // Adding sample tasks for demonstration
-        tasks.add(new Task(1, "Work Out", "This weekend", false, LocalDate.now() ));
-        tasks.add(new Task(2, "Study", "For exams", false, LocalDate.now()));
+        tasks.add(new Task(1, "Work Out", "This weekend", true, LocalDate.now() ));
+        tasks.add(new Task(2, "Study", "For exams", true, LocalDate.now()));
         tasks.add(new Task(3, "Grocery shopping", "Buy vegetables", false, LocalDate.now()));
     }
 
@@ -51,6 +51,36 @@ public class toDoController {
                 break;
             }
         }
+        return "redirect:/Todo";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editTask(@PathVariable int id, Model model) {
+        // Find the task in the list
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                // Add the task to the model
+                model.addAttribute("task", task);
+                break;
+            }
+        }
+        // Return the name of the view that contains the form for editing a task
+        return "Todo/edit";
+    }
+
+    @PostMapping("/edit/{id}    ")
+    public String updateTask(@ModelAttribute Task task) {
+        // Find the task in the list
+        for (Task existingTask : tasks) {
+            if (existingTask.getId() == task.getId()) {
+                // Update the task fields
+                existingTask.setTaskName(task.getTaskName());
+                existingTask.setDescription(task.getDescription());
+                existingTask.setDone(task.isDone());
+                break;
+            }
+        }
+        // Redirect to the home page
         return "redirect:/Todo";
     }
 
