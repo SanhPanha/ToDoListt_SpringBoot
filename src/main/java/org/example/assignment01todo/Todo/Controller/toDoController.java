@@ -38,6 +38,7 @@ public class toDoController {
 
     @PostMapping("new")
     public String addTask(@ModelAttribute Task task) {
+        task.setDate(LocalDate.now());
         tasks.add(task);
         return "redirect:/Todo";
     }
