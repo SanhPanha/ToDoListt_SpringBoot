@@ -90,4 +90,16 @@ public class toDoController {
         return "redirect:/Todo";
     }
 
+    @GetMapping("/search")
+    public String searchTasks(@RequestParam String status, Model model) {
+        List<Task> filteredTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if ((status.equals("done") && task.isDone()) || (status.equals("not done") && !task.isDone())) {
+                filteredTasks.add(task);
+            }
+        }
+        model.addAttribute("tasks", filteredTasks);
+        return "Todo/search";
+    }
+
 }
