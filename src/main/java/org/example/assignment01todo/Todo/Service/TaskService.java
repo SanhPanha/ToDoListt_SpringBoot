@@ -40,4 +40,8 @@ public class TaskService {
             existingTask.setDone(task.isDone());
         }
     }
+
+    public void deleteTask(int id) {
+        todoList.removeIf(task -> task.getId() == id);
+    }
 }

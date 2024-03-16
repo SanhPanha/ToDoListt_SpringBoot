@@ -68,7 +68,7 @@ public class toDoController {
         return "Todo/edit";
     }
 
-    @PostMapping("/edit/{id}    ")
+    @PostMapping("/edit/{id}")
     public String updateTask(@ModelAttribute Task task) {
         // Find the task in the list
         for (Task existingTask : tasks) {
@@ -81,6 +81,12 @@ public class toDoController {
             }
         }
         // Redirect to the home page
+        return "redirect:/Todo";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteTask(@PathVariable int id) {
+        tasks.removeIf(task -> task.getId() == id);
         return "redirect:/Todo";
     }
 

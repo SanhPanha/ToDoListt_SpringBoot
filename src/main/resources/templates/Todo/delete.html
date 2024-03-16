@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ToDo</title>
+    <title>New</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet"/>
 
@@ -60,51 +60,12 @@
 
     <!--Main Content-->
     <main class="mt-20 flex justify-center">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-semibold mb-4 text-center">My ToDo</h2>
-            <div class="flex overflow-x-auto">
-                <table class="table-auto w-full border-collapse text-center">
-                    <thead>
-                    <tr class="bg-gray-200">
-                        <th class="px-4 py-2">ID</th>
-                        <th class="px-4 py-2">Task</th>
-                        <th class="px-4 py-2">Description</th>
-                        <th class="px-4 py-2">Done</th>
-                        <th class="px-4 py-2">Date</th>
-                        <th class="px-4 py-2">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- Loop through tasks -->
-                    <tr class="bg-white" th:each="task : ${tasks}">
-                        <td class="border px-4 py-2" th:text="${task.id}">1</td>
-                        <td class="border px-4 py-2" th:text="${task.taskName}">Work Out</td>
-                        <td class="border px-4 py-2" th:text="${task.description}">This weekend</td>
-                        <td class="border px-4 py-2" th:text="${task.done ? 'Done' : 'Not Done'}">False</td>
-                        <td class="border px-4 py-2" th:text="${task.getFormattedDate()}"></td>
-                        <td class="border px-4 py-2">
-                            <button class="bg-blue-400 hover:bg-blue-500 rounded-lg">
-                                <a th:href="@{/Todo/edit/{id}(id=${task.id})}" class="text-black hover:text-white p-2">Edit</a>
-                            </button>
-                            <span>  |   </span>
-
-                            <button class="bg-red-400 hover:bg-red-500 rounded-lg">
-                                <a th:href="@{/Todo/delete/{id}(id=${task.id})}" class="text-black hover:text-white p-2">Delete</a>
-                            </button>
-
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="flex justify-center mt-8">
-                <button class="bg-blue-500 hover:bg-blue-800 rounded-lg">
-                    <a th:href="@{/Todo/new}" class="block text-2xl text-black hover:text-white py-2 px-4">New</a>
-                </button>
-            </div>
-        </div>
+        <form action="/todo/delete/${task.id}" method="post">
+            <input type="hidden" name="_method" value="delete" />
+            <button type="submit">Delete</button>
+        </form>
     </main>
+
 
     <!--Footer-->
     <footer class="bg-gray-300">
