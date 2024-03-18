@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,14 +59,74 @@
     </nav>
 
     <!--Main Content-->
-    <main class="mt-20 flex justify-center">
-        <form action="#" th:action="@{/Todo/search}" method="get">
-            <select name="status">
-                <option value="done">Done</option>
-                <option value="not done">Not Done</option>
-            </select>
-            <input type="submit" value="Search">
-        </form>
+    <main class="mt-20 flex flex-col justify-center">
+        <div class="flex justify-center gap-6 my-12">
+            <label>
+                <input class="rounded-lg" type="text" placeholder="Enter Task Title">
+            </label>
+
+            <form action="#" th:action="@{/Todo/new}" th:object="${task}" method="post"
+                  class="flex flex-col justify-center gap-4">
+                <label>
+                    <select class="rounded-lg bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                            th:field="*{done}">
+                        <option value="true">Done</option>
+                        <option value="false">Not Done</option>
+                    </select>
+                </label>
+            </form>
+
+            <button class="bg-blue-500 hover:bg-blue-800 rounded-md">
+                <a href="#" class="block text-2xl px-8 text-center text-white">Search</a>
+            </button>
+        </div>
+
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-semibold mb-4 text-center">My ToDo</h2>
+            <div class="flex overflow-x-auto">
+                <table class="table-auto w-full border-collapse text-center">
+                    <thead>
+                    <tr class="bg-gray-500">
+                        <th class="px-4 text-white py-2">ID</th>
+                        <th class="px-4 text-white py-2">Task</th>
+                        <th class="px-4 text-white py-2">Description</th>
+                        <th class="px-4 text-white py-2">Done</th>
+                        <th class="px-4 text-white py-2">Date</th>
+                        <th class="px-4 text-white py-2">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Loop through tasks -->
+                    <tr class="bg-white" th:each="task : ${tasks}">
+                        <td class="border px-4 py-2" th:text="${task.id}">1</td>
+                        <td class="border px-4 py-2" th:text="${task.taskName}">Work Out</td>
+                        <td class="border px-4 py-2" th:text="${task.description}">This weekend</td>
+                        <td class="border px-4 py-2" th:text="${task.done ? 'Done' : 'Not Done'}">False</td>
+                        <td class="border px-4 py-2" th:text="${task.getFormattedDate()}"></td>
+                        <td class="border px-4 py-2">
+                            <button class="bg-blue-400 hover:bg-blue-500 rounded-lg">
+                                <a th:href="@{/Todo/edit/{id}(id=${task.id})}" class="text-black hover:text-white p-2">Edit</a>
+                            </button>
+                            <span>  |   </span>
+
+                            <button class="bg-red-400 hover:bg-red-500 rounded-lg">
+                                <a th:href="@{/Todo/delete/{id}(id=${task.id})}"
+                                   class="text-black hover:text-white p-2">Delete</a>
+                            </button>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex justify-center gap-6 mt-8">
+                <button class="bg-red-400 hover:bg-red-500 rounded-lg">
+                    <a th:href="@{/Todo}" class="block text-2xl text-black hover:text-white py-2 px-4">Back to Task
+                        List</a>
+                </button>
+            </div>
+        </div>
     </main>
 
 
