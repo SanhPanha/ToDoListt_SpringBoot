@@ -10,7 +10,6 @@ import java.util.List;
 public class ToDoListDataSource {
     @Bean
     public List<Task> todoList() {
-        List<Task> todoList = new ArrayList<>();
-        return todoList;
+        return new ArrayList<>();
     }
 }

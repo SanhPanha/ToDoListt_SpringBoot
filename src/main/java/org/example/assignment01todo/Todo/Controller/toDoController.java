@@ -1,6 +1,4 @@
 package org.example.assignment01todo.Todo.Controller;
-import org.example.assignment01todo.Todo.Service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.example.assignment01todo.Todo.Model.Task;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/Todo")
@@ -19,7 +18,7 @@ public class toDoController {
         tasks = new ArrayList<>();
 
         // Adding sample tasks for demonstration
-        tasks.add(new Task(1, "Work Out", "This weekend", true, LocalDate.now() ));
+        tasks.add(new Task(1, "Work Out", "This weekend", true, LocalDate.now()));
         tasks.add(new Task(2, "Study", "For exams", true, LocalDate.now()));
         tasks.add(new Task(3, "Grocery shopping", "Buy vegetables", false, LocalDate.now()));
     }
@@ -91,9 +90,19 @@ public class toDoController {
     }
 
     @GetMapping("/search")
-    public String searchTasks(Model model) {
-        model.addAttribute("task", new Task());
+    public String searchTasks(Model model, @RequestParam(required = false) String taskName, @RequestParam(required = false) String isDone) {
+        if (taskName != null || isDone != null) {
+            List<Task> filteredTasks;
+            if (taskName != null && isDone != null) {
+                boolean doneStatus = Boolean.parseBoolean(isDone);
+                filteredTasks = tasks.stream()
+                        .filter(task -> task.getTaskName().equalsIgnoreCase(taskName) && task.isDone() == doneStatus)
+                        .collect(Collectors.toList());
+            } else {
+                filteredTasks = new ArrayList<>(tasks);
+            }
+            model.addAttribute("tasks", filteredTasks);
+        }
         return "Todo/search";
     }
-
 }

@@ -1,73 +1,50 @@
 package org.example.assignment01todo.Todo.Model;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
+    // Getters and setters
+    @Setter
+    @Getter
     private int id;
+    @Getter
+    @Setter
     private String taskName;
+    @Getter
+    @Setter
     private String description;
-    private boolean done;
+    private boolean isDone;
+    @Getter
+    @Setter
     private LocalDate date;
 
     // Constructors
     public Task() {
     }
 
-    public Task(int id, String taskName, String description, boolean done, LocalDate date) {
+    public Task(int id, String taskName, String description, boolean isDone, LocalDate date) {
         this.id = id;
         this.taskName = taskName;
         this.description = description;
-        this.done = done;
+        this.isDone = isDone;
         this.date = date;
-    }
-
-    // Getters and setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTaskName() {
-        return taskName;
-    }
-
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public String getFormattedDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return date.format(formatter);
     }
-
-
 }
 
 

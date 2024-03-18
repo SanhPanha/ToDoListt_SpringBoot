@@ -63,8 +63,8 @@
         <form action="#" th:action="@{/Todo/new}" th:object="${task}" method="post"
               class="flex flex-col justify-center gap-4">
             <h2 class="text-center text-2xl font-bold">Add New Task</h2>
-            <input class="rounded-lg" type="number" th:field="*{id}">
-            <input class="rounded-lg" type="text" th:field="*{taskName}" placeholder="Title">
+            <input class="rounded-lg" type="number" th:field="*{id}" required>
+            <input class="rounded-lg" type="text" th:field="*{taskName}" placeholder="Title" required>
             <input class="rounded-lg" type="text" th:field="*{description}" placeholder="Description">
             <select class="rounded-lg bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                     th:field="*{done}">
