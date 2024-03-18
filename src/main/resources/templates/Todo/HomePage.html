@@ -83,7 +83,7 @@
                         <td class="border px-4 py-2" th:text="${task.done ? 'Done' : 'Not Done'}">False</td>
                         <td class="border px-4 py-2" th:text="${task.getFormattedDate()}"></td>
                         <td class="border px-4 py-2">
-                            <button class="bg-blue-400 hover:bg-blue-500 rounded-lg">
+                            <button class="bg-blue-400 hover:bg-blue-500 rounded-lg" >
                                 <a th:href="@{/Todo/edit/{id}(id=${task.id})}" class="text-black hover:text-white p-2">Edit</a>
                             </button>
                             <span>  |   </span>
@@ -213,8 +213,6 @@
     <!--Script-->
 </div>
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://flowbite.com/docs/js/app.js"></script>
-<script src="https://flowbite.com/docs/js/init-alpine.js"></script>
 
 </body>
 </html>

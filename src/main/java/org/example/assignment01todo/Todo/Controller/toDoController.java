@@ -36,7 +36,21 @@ public class toDoController {
     }
 
     @PostMapping("new")
-    public String addTask(@ModelAttribute Task task) {
+    public String addTask(@ModelAttribute Task task, Model model) {
+        if (task.getId() <= 0) {
+            model.addAttribute("errorNum", "ID must be greater than 0");
+            return "Todo/new";
+        }
+        for (Task existingTask : tasks) {
+            if (existingTask.getId() == task.getId()) {
+                model.addAttribute("errorID", "ID already exists");
+                return "Todo/new";
+            }
+        }
+        if (task.getTaskName().matches(".*\\d.*")) {
+            model.addAttribute("errorName", "Task name cannot contain numbers");
+            return "Todo/new";
+        }
         task.setDate(LocalDate.now());
         tasks.add(task);
         return "redirect:/Todo";
@@ -68,7 +82,7 @@ public class toDoController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateTask(@ModelAttribute Task task) {
+    public String updateTask(@ModelAttribute Task task, Model model) {
         // Find the task in the list
         for (Task existingTask : tasks) {
             if (existingTask.getId() == task.getId()) {
@@ -78,6 +92,11 @@ public class toDoController {
                 existingTask.setDone(task.isDone());
                 break;
             }
+        }
+
+        if (task.getTaskName().matches(".*\\d.*")) {
+            model.addAttribute("errorName", "Task name cannot contain numbers");
+            return "Todo/new";
         }
         // Redirect to the home page
         return "redirect:/Todo";
